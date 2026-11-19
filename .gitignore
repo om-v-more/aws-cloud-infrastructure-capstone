@@ -1,0 +1,23 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+.terraformrc
+terraform.rc
+
+# Secrets and credentials
+*.pem
+*.key
+.env
+.env.*
+!*.env.example
+.aws/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
