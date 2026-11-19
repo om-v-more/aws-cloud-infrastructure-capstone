@@ -191,3 +191,5 @@ resource "aws_instance" "web" {
     Name = "${local.name_prefix}-ec2"
   }
 }
+
+# Project 6: Demonstration of Terraform change tracking through Git.
