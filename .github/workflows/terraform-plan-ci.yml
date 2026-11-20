@@ -1,0 +1,59 @@
+
+name: Terraform Plan CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: project-12-terraform-plan-ci
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Initialize
+        run: terraform init -backend=false -input=false
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Generate Terraform Plan
+        run: terraform plan -input=false -refresh=false -out=tfplan
+
+      - name: Generate Readable Plan Summary
+        run: terraform show -no-color tfplan > plan-summary.txt
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plans
+          path: project-12-terraform-plan-ci/tfplan
+          retention-days: 5
+
+      - name: Upload Plan Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan-summaries
+          path: project-12-terraform-plan-ci/plan-summary.txt
+          retention-days: 5
