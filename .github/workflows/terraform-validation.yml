@@ -1,0 +1,47 @@
+name: Terraform CI Validation
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-validation:
+    name: Terraform Format and Validate
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - project-01-ec2-webserver-eu-west-3
+          - project-02-s3-static-website
+          - project-03-ec2-cloudwatch-monitoring
+          - project-04-iam-user-automation
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Check Terraform formatting
+        working-directory: ${{ matrix.project }}
+        run: terraform fmt -check -recursive
+
+      - name: Initialize Terraform
+        working-directory: ${{ matrix.project }}
+        run: terraform init -backend=false -input=false
+
+      - name: Validate Terraform configuration
+        working-directory: ${{ matrix.project }}
+        run: terraform validate -no-color
