@@ -1,13 +1,15 @@
-
 name: GitOps Infrastructure Deployment
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - main
     paths:
       - 'project-12-terraform-plan-ci/**'
       - '.github/workflows/gitops-terraform-apply.yml'
+
   workflow_dispatch:
 
 permissions:
@@ -16,6 +18,7 @@ permissions:
 jobs:
   terraform-apply:
     name: Approved Terraform Apply
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     environment:
