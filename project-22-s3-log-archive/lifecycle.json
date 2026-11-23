@@ -1,0 +1,14 @@
+{
+  "Rules": [
+    {
+      "ID": "omm-project-22-log-expiration",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "logs/"
+      },
+      "Expiration": {
+        "Days": 30
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+2026-11-23 09:00:00 INFO Application started
+2026-11-23 09:05:12 INFO User authentication successful
+2026-11-23 09:10:25 INFO Database connection established
+2026-11-23 09:15:40 WARNING High response time detected
+2026-11-23 09:20:18 INFO Request processed successfully
+2026-11-23 09:25:32 ERROR Sample application error for archive testing
+2026-11-23 09:30:00 INFO Application health check successful
+2026-11-23 09:35:45 INFO Application shutdown
