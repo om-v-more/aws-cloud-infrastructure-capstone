@@ -1,0 +1,13 @@
+NAME                             READY   STATUS    RESTARTS   AGE     IP           NODE              NOMINATED NODE   READINESS GATES
+pod/omm-webapp-968f64758-6nt8j   1/1     Running   0          2m36s   10.42.0.20   azltt0222435e27   <none>           <none>
+pod/omm-webapp-968f64758-bcmwk   1/1     Running   0          2m39s   10.42.0.19   azltt0222435e27   <none>           <none>
+
+NAME                         TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+service/omm-webapp-service   NodePort   10.43.164.156   <none>        80:30080/TCP   5h35m   app=omm-webapp
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                                                                   SELECTOR
+deployment.apps/omm-webapp   2/2     2            2           5h37m   webapp       590507089733.dkr.ecr.eu-west-3.amazonaws.com/omm-project-13-webapp:2.0   app=omm-webapp
+
+NAME                                    DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES                                                                   SELECTOR
+replicaset.apps/omm-webapp-7fc4974b49   0         0         0       5h37m   webapp       590507089733.dkr.ecr.eu-west-3.amazonaws.com/omm-project-13-webapp:1.0   app=omm-webapp,pod-template-hash=7fc4974b49
+replicaset.apps/omm-webapp-968f64758    2         2         2       2m39s   webapp       590507089733.dkr.ecr.eu-west-3.amazonaws.com/omm-project-13-webapp:2.0   app=omm-webapp,pod-template-hash=968f64758
